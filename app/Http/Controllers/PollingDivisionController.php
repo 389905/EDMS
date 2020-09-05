@@ -99,6 +99,12 @@ class PollingDivisionController extends Controller
      */
     public function destroy(PollingDivision $pollingDivision)
     {
-        //
+        if(PollingDivision::destroy($pollingDivision->id)){
+          Session::flash('success', 'Polling Division was deleted');
+        }else{
+          Session::flash('error', 'Something went wrong!');
+        }
+
+        return back();
     }
 }

@@ -17,7 +17,7 @@
       </div>
       <div>
         <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-          Total citizens</p>
+          Total registered voters</p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
           6389
         </p>
@@ -79,16 +79,29 @@
   </div>
 </div> {{-- end of stats --}}
 
+
+@if(Session::has('success'))
+<div class="mt-2 w-1/2 px-4 py-3 flex items-center bg-green-100 text-green-700 text-sm font-semibold rounded border" role="alert">
+  <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+  </svg>
+  <p>{{ Session::get('success') }}</p>
+</div>
+@endif
+
 <!-- post card -->
 <div class="flex justify-between mx-4 my-4 max-w-md md:max-w-2xl">
   <h2 class="ml-4 text-lg text-gray-800 font-semibold">Polling Divisions</h2>
-  <a class="" href="{{ route('pollingDivision.create', $district) }}">Add new</a>
+  <a class="text-blue-500 font-semibold hover:text-blue-400 px-2" href="{{ route('pollingDivision.create', $district) }}">Add new</a>
 </div>
 
 @foreach ($district->pollingDivisions as $key => $pollingDivision)
   <div class="flex bg-white shadow-lg rounded-lg mx-4 my-4 max-w-md md:max-w-2xl "><!--horizantil margin is just for display-->
      <div class="flex items-start px-4 py-6">
-        <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src="https://cdn4.iconfinder.com/data/icons/elections-polling/614/4543_-_Giving_Vote-512.png" alt="avatar">
+        <img
+          class="w-12 h-12 rounded-full object-cover mr-4 shadow"
+          src="https://cdn4.iconfinder.com/data/icons/elections-polling/614/4543_-_Giving_Vote-512.png"
+          alt="avatar">
         <div class="">
            <div class="flex items-center justify-between">
               <h2 class="text-lg font-semibold text-gray-900 -mt-1">{{ $pollingDivision->name }}</h2>
@@ -101,7 +114,11 @@
 
            <div class="mt-4 flex items-center float-right">
              <div class="flex mr-2 text-red-700 text-sm mr-4">
-                <a class="" href="#">Delete</a>
+               <form class="" action="{{ route('pollingDivision.destroy', $pollingDivision) }}" method="post">
+                 @csrf
+                 @method('delete')
+                 <button type="submit" class="focus:outline-none" >Delete</button>
+               </form>
              </div>
           </div>
 
