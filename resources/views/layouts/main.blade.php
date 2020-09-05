@@ -33,10 +33,13 @@
 
         @include('layouts.partials.sidebar')
 
-        <div class="bg-gray-100 flex-1 px-2 py-2 flex-col relative">
-          @yield('content')
+        <div class="bg-gray-100 flex-1 px-2 py-2 flex-col ">
+          <div class="h-full">
+            @yield('content')
+          </div>
 
-          <div class="bg-white border-2 border-gray-200 rounded-lg absolute bottom-0 right-0 left-0 mt-2 mb-2 mx-2 items-center">
+
+          <div class="bg-white border-2 border-gray-200 rounded-lg -mt-8 right-0 left-0 mx-2 items-center">
             <div class="flex justify-between px-2 py-2">
               <div class="text-xs text-gray-800">
                 {{ now()->format('l jS \\of F Y h:i:s A') }}

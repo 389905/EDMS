@@ -6,7 +6,7 @@
   <span class="text-xs text-gray-800 capitalize">| All {{ count($districts) }} districts in Sri Lanka</span>
 </div>
 
-<div class="flex flex-col w-8/12">
+<div class="mx-auto mt-4 mb-4 flex flex-col xl:w-8/12">
   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
       <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -43,7 +43,9 @@
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-no-wrap">
-                <div class="leading-5 text-gray-900">{{ $district->name }}</div>
+                <div class="leading-5 text-gray-900">
+                  <a href="{{ route('district.show', $district) }}">{{ $district->name }}</a>
+                </div>
                 <div class="text-sm leading-5 text-gray-500">Default Province</div>
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">

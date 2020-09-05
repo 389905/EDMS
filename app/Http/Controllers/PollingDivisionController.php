@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\District;
+use App\PollingDivision;
 use Illuminate\Http\Request;
 
-class DistrictController extends Controller
+class PollingDivisionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class DistrictController extends Controller
      */
     public function index()
     {
-        return view('pages.district.index')->with([
-          'districts' => District::all(),
-        ]);
+        //
     }
 
     /**
@@ -43,23 +41,21 @@ class DistrictController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\district  $district
+     * @param  \App\PollingDivision  $pollingDivision
      * @return \Illuminate\Http\Response
      */
-    public function show(district $district)
+    public function show(PollingDivision $pollingDivision)
     {
-        return view('pages.district.show')->with([
-          'district' => $district,
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\district  $district
+     * @param  \App\PollingDivision  $pollingDivision
      * @return \Illuminate\Http\Response
      */
-    public function edit(district $district)
+    public function edit(PollingDivision $pollingDivision)
     {
         //
     }
@@ -68,10 +64,10 @@ class DistrictController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\district  $district
+     * @param  \App\PollingDivision  $pollingDivision
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, district $district)
+    public function update(Request $request, PollingDivision $pollingDivision)
     {
         //
     }
@@ -79,10 +75,10 @@ class DistrictController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\district  $district
+     * @param  \App\PollingDivision  $pollingDivision
      * @return \Illuminate\Http\Response
      */
-    public function destroy(district $district)
+    public function destroy(PollingDivision $pollingDivision)
     {
         //
     }

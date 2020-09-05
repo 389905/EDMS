@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // district
 Route::get('district', 'DistrictController@index')->name('district.index');
+Route::get('district/{district}', 'DistrictController@show')->name('district.show');
 
 // user
 Route::get('user', 'userController@index')->name('user.index');
