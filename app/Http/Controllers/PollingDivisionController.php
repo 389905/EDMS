@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\PollingDivision;
+use App\District;
 use Illuminate\Http\Request;
+use Session;
 
 class PollingDivisionController extends Controller
 {
@@ -22,9 +24,11 @@ class PollingDivisionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(District $district)
     {
-        //
+        return view('pages.pollingDivision.create')->with([
+          'district' => $district,
+        ]);
     }
 
     /**
@@ -35,7 +39,22 @@ class PollingDivisionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'name' => ['required'],
+      ]);
+
+        $pollingDivision = PollingDivision::create([
+          'name' => $request['name'],
+          'district_id' => $request['district_id'],
+        ]);
+
+
+        if($pollingDivision){
+          Session::flash('success', 'Polling Division '.$pollingDivision->name.' was added for district '.$pollingDivision->district->name);
+        }else{
+          Session::flash('error', 'Something went wrong!');
+        }
+        return redirect()->route('district.show', $pollingDivision->district);
     }
 
     /**
