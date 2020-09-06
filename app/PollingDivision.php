@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\DivSec;
 
 class PollingDivision extends Model
 {
@@ -12,5 +13,9 @@ class PollingDivision extends Model
 
     public function district(){
       return $this->belongsTo(District::class);
+    }
+
+    public function divSec(){
+      return $this->hasMany(DivSec::class);
     }
 }

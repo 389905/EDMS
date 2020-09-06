@@ -39,3 +39,11 @@ Route::post('pollingdivision', 'PollingDivisionController@store')->name('polling
 Route::get('pollingdivision/{pollingDivision}/edit', 'PollingDivisionController@edit')->name('pollingDivision.edit');
 Route::put('pollingdivision/{pollingDivision}', 'PollingDivisionController@update')->name('pollingDivision.update');
 Route::delete('pollingdivision/{pollingDivision}', 'PollingDivisionController@destroy')->name('pollingDivision.destroy');
+
+// divisional secretariats
+Route::get('divsec', 'DivSecController@index')->name('divsec.index');
+Route::get('divsec/create', 'DivSecController@create')->name('divsec.create');
+Route::post('divsec', 'DivSecController@store')->name('divsec.store');
+Route::get('divsec/{divSec}/edit', 'DivSecController@edit')->name('divsec.edit');
+Route::put('divsec/{divSec}', 'DivSecController@update')->name('divsec.update');
+Route::delete('divsec/{divSec}', 'DivSecController@destroy')->name('divsec.destroy');
