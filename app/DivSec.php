@@ -14,4 +14,8 @@ class DivSec extends Model
     public function pollingDivision(){
       return $this->belongsTo(PollingDivision::class);
     }
+
+    public function gnDivisions(){
+      return $this->hasMany(gnDivision::class);
+    }
 }

@@ -15,7 +15,7 @@ class PollingDivision extends Model
       return $this->belongsTo(District::class);
     }
 
-    public function divSec(){
+    public function divSecs(){
       return $this->hasMany(DivSec::class);
     }
 }

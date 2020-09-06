@@ -3,8 +3,8 @@
 @section('content')
 
 <div class="heading text-xl px-2 py-2 border-b-2 border-gray-400">
-  <span class="text-gray-900 font-semibold">{{ $district->name }}</span>
-  <span class="text-xs text-gray-800 capitalize">| All the data of {{ $district->name }} district.</span>
+  <span class="text-gray-900 font-semibold">{{ $divSec->name }}</span> Divisional Secretariat
+  <span class="text-xs text-gray-800 capitalize">| All the data of {{ $divSec->name }} of {{ $divSec->pollingDivision->name }} polling division.</span>
 </div>
 
 <div class="mt-4 my-4 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
@@ -33,10 +33,10 @@
       </div>
       <div>
         <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-          Polling divisions
+          Divisional Secretariats
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {{ $district->pollingDivisions->count() }}
+          0
         </p>
       </div>
     </div>
@@ -50,7 +50,7 @@
       </div>
       <div>
         <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-          Active citizens
+          Grama Niladhari Divisions
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
           376
@@ -91,11 +91,12 @@
 
 <!-- post card -->
 <div class="flex justify-between mx-4 my-4 max-w-md md:max-w-2xl">
-  <h2 class="ml-4 text-lg text-gray-800 font-semibold">Polling Divisions</h2>
-  <a class="text-blue-500 font-semibold hover:text-blue-400 px-2" href="{{ route('pollingDivision.create', $district) }}">Add new</a>
+  <h2 class="ml-4 text-lg text-gray-800 font-semibold">Grama Niladhari Divisions</h2>
+  <a class="text-blue-500 font-semibold hover:text-blue-400 px-2" href="#">Add new</a>
 </div>
 
-@foreach ($district->pollingDivisions as $key => $pollingDivision)
+{{-- Divisional Secretariats --}}
+@foreach ($divSec->gnDivisions as $key => $gnDivision)
   <div class="flex bg-white shadow-lg rounded-lg mx-4 my-4 max-w-md md:max-w-2xl "><!--horizantil margin is just for display-->
      <div class="flex items-start px-4 py-6 w-full">
         <img
@@ -104,21 +105,21 @@
           alt="avatar">
         <div class="w-full ">
            <div class="flex items-center justify-between ">
-              <a href="{{ route('pollingDivision.show', $pollingDivision) }}" class="text-lg font-semibold text-gray-900 -mt-1">{{ $pollingDivision->name }}</a>
-              <small class="text-sm text-gray-700">Last updated {{ $pollingDivision->updated_at->diffForHumans() }}</small>
+              <a href="" class="text-lg font-semibold text-gray-900 -mt-1">{{ $gnDivision->name }}</a>
+              <small class="text-sm text-gray-700">Last updated {{ $gnDivision->updated_at->diffForHumans() }}</small>
            </div>
-           <p class="text-gray-700">Created {{ $pollingDivision->created_at->diffForHumans() }}</p>
+           <p class="text-gray-700">Created {{ $gnDivision->created_at->diffForHumans() }}</p>
            <p class="mt-3 text-gray-700 text-sm ">
-              <span class="text-gray-600 text-xs uppercase">Divisional Secretariat(s): </span> {{ $pollingDivision->divSecs->pluck('name')->implode(', ',) }}
+              <span class="text-gray-600 text-xs uppercase">Grama Niladhari Division(s): </span>
            </p>
 
            <div class="mt-4 flex items-center float-right">
              <div class="flex mr-2 text-sm">
-               <a class="text-green-600 font-semibold hover:text-green-400" href="{{ route('pollingDivision.edit', $pollingDivision) }}">Update</a>
-               <form class="ml-4" action="{{ route('pollingDivision.destroy', $pollingDivision) }}" method="post">
+               <a class="text-green-600 font-semibold hover:text-green-400 cursor-not-allowed" href="#">Update</a>
+               <form class="ml-4" action="#" method="post">
                  @csrf
                  @method('delete')
-                 <button type="submit" class="text-red-500 hover:text-red-400 font-semibold focus:outline-none" onclick="return confirm('Are you sure you want to delete {{ $pollingDivision->name }}?');">Delete</button>
+                 <button type="submit" class="cursor-not-allowed text-red-500 hover:text-red-400 font-semibold focus:outline-none" >Delete</button>
                </form>
              </div>
           </div>

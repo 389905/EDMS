@@ -67,7 +67,9 @@ class DivSecController extends Controller
      */
     public function show(DivSec $divSec)
     {
-        //
+        return view('pages.divSec.show')->with([
+          'divSec' => $divSec,
+        ]);
     }
 
     /**

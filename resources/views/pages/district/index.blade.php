@@ -46,7 +46,7 @@
                 <div class="leading-5 text-gray-900">
                   <a href="{{ route('district.show', $district) }}">{{ $district->name }}</a>
                 </div>
-                <div class="text-sm leading-5 text-gray-500">Default Province</div>
+                <div class="text-sm leading-5 text-gray-500">{{ $district->divSecs->count() }} Divisional Secretariats</div>
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
                 {{ $district->updated_at }}
