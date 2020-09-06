@@ -76,7 +76,9 @@ class PollingDivisionController extends Controller
      */
     public function edit(PollingDivision $pollingDivision)
     {
-        //
+        return view('pages.pollingDivision.edit')->with([
+          'pollingDivision' => $pollingDivision,
+        ]);
     }
 
     /**
@@ -88,7 +90,19 @@ class PollingDivisionController extends Controller
      */
     public function update(Request $request, PollingDivision $pollingDivision)
     {
-        //
+        $request->validate([
+          'name' => ['required'],
+        ]);
+
+        $pollingDivision->name = $request['name'];
+
+        if($pollingDivision->save()){
+          Session::flash('success', 'Polling Division '.$pollingDivision->name.' was updated');
+        }else{
+          Session::flash('error', 'Something went wrong!');
+        }
+        return redirect()->route('district.show', $pollingDivision->district);
+
     }
 
     /**

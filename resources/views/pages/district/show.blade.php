@@ -113,11 +113,12 @@
            </p>
 
            <div class="mt-4 flex items-center float-right">
-             <div class="flex mr-2 text-red-700 text-sm mr-4">
-               <form class="" action="{{ route('pollingDivision.destroy', $pollingDivision) }}" method="post">
+             <div class="flex mr-2 text-sm">
+               <a class="text-green-600 font-semibold hover:text-green-400" href="{{ route('pollingDivision.edit', $pollingDivision) }}">Update</a>
+               <form class="ml-4" action="{{ route('pollingDivision.destroy', $pollingDivision) }}" method="post">
                  @csrf
                  @method('delete')
-                 <button type="submit" class="focus:outline-none" >Delete</button>
+                 <button type="submit" class="text-red-500 hover:text-red-400 font-semibold focus:outline-none" onclick="return confirm('Are you sure you want to delete {{ $pollingDivision->name }}?');">Delete</button>
                </form>
              </div>
           </div>

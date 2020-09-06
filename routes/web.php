@@ -36,4 +36,6 @@ Route::delete('user/{user}', 'userController@destroy')->name('user.destroy');
 // polling division
 Route::get('pollingdivision/create/{district}', 'PollingDivisionController@create')->name('pollingDivision.create');
 Route::post('pollingdivision', 'PollingDivisionController@store')->name('pollingDivision.store');
+Route::get('pollingdivision/{pollingDivision}/edit', 'PollingDivisionController@edit')->name('pollingDivision.edit');
+Route::put('pollingdivision/{pollingDivision}', 'PollingDivisionController@update')->name('pollingDivision.update');
 Route::delete('pollingdivision/{pollingDivision}', 'PollingDivisionController@destroy')->name('pollingDivision.destroy');
