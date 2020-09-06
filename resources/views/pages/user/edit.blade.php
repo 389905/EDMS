@@ -64,15 +64,21 @@
   </div>
 
   <div class="flex justify-end">
-    <button class="mt-2 py-2 px-4 bg-orange-500 hover:bg-orange-400 text-white font-bold rounded inline-flex items-center outline-none">
+    <button class="mt-2 py-2 px-4 bg-orange-500 hover:bg-orange-400 text-white font-bold rounded inline-flex items-center focus:outline-none focus:shadow-outline">
       <svg class=" w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
         <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
       </svg>
 
-      <span class="font-semibold">Update</span>
+      <span class="font-semibold ">Update</span>
     </button>
   </div>
+</form>
 
-
+<form class="mx-auto w-full max-w-lg " action="{{ route('user.destroy', $user) }}" method="post">
+  @csrf
+  @method('delete')
+  <button type="submit" class="px-2 text-red-500 font-semibold float-right focus:outline-none focus:shadow-outline">
+    Delete
+  </button>
 </form>
 @endsection

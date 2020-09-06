@@ -125,6 +125,16 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->roles()->detach();
+
+        $name = $user->name;
+
+        if($user->delete()){
+          Session::flash('success', $name.' was deleted');
+        }else{
+          Session::flash('error', 'Something went wrong!');
+        }
+
+        return redirect()->route('user.index');
     }
 }
