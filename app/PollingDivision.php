@@ -18,4 +18,12 @@ class PollingDivision extends Model
     public function divSecs(){
       return $this->hasMany(DivSec::class);
     }
+
+    public function gnDivisions(){
+      return $this->hasManyThrough(GnDivision::class, DivSec::class);
+    }
+
+    public function pollingBooths(){
+      return $this->hasMany(PollingBooth::class);
+    }
 }

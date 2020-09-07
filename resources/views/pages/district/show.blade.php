@@ -2,9 +2,15 @@
 
 @section('content')
 
-<div class="heading text-xl px-2 py-2 border-b-2 border-gray-400">
-  <span class="text-gray-900 font-semibold">{{ $district->name }}</span>
-  <span class="text-xs text-gray-800 capitalize">| All the data of {{ $district->name }} district.</span>
+<div class="flex items-center justify-between heading text-xl px-2 py-2 border-b-2 border-gray-400">
+  <div class="">
+    <span class="text-gray-900 font-semibold">{{ $district->name }}</span>
+    <span class="text-xs text-gray-800 capitalize">| All the data of {{ $district->name }} district.</span>
+  </div>
+
+  <div class="mr-2 text-sm">
+    {{ $district->name }} district
+  </div>
 </div>
 
 <div class="mt-4 my-4 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
@@ -19,7 +25,7 @@
         <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
           Total registered voters</p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          6389
+          N/A
         </p>
       </div>
     </div>
@@ -50,10 +56,10 @@
       </div>
       <div>
         <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-          Active citizens
+          Divisional Secretariats
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          376
+          {{ $district->divSecs->count() }}
         </p>
       </div>
     </div>
@@ -71,9 +77,9 @@
       </div>
       <div>
         <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-          Pending actions
+          Villages
         </p>
-        <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">35</p>
+        <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">N/A</p>
       </div>
     </div>
   </div>

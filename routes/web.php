@@ -49,3 +49,27 @@ Route::get('divsec/{divSec}/edit', 'DivSecController@edit')->name('divsec.edit')
 Route::put('divsec/{divSec}', 'DivSecController@update')->name('divsec.update');
 Route::delete('divsec/{divSec}', 'DivSecController@destroy')->name('divsec.destroy');
 Route::get('divsec/{divSec}', 'DivSecController@show')->name('divsec.show');
+
+// grama niladhari divisions
+Route::get('gndivision/create/{divSec}', 'gnDivisionController@create')->name('gndivision.create');
+Route::post('gndivision', 'gnDivisionController@store')->name('gndivision.store');
+Route::get('gndivision/{gnDivision}/edit', 'gnDivisionController@edit')->name('gndivision.edit');
+Route::put('gndivision/{gnDivision}', 'gnDivisionController@update')->name('gndivision.update');
+Route::delete('gndivision/{gnDivision}', 'gnDivisionController@destroy')->name('gndivision.destroy');
+Route::get('gndivision/{gnDivision}', 'gnDivisionController@show')->name('gndivision.show');
+
+// villages divisions
+Route::get('village/create/{gnDivision}', 'VillageController@create')->name('village.create');
+Route::post('village', 'VillageController@store')->name('village.store');
+Route::get('village/{village}/edit', 'VillageController@edit')->name('village.edit');
+Route::put('village/{village}', 'VillageController@update')->name('village.update');
+Route::delete('village/{village}', 'VillageController@destroy')->name('village.destroy');
+Route::get('village/{village}', 'VillageController@show')->name('village.show');
+
+// polling booths
+Route::get('pollingbooth/create/{pollingDivision}', 'PollingBoothController@create')->name('pollingbooth.create');
+Route::post('pollingbooth', 'PollingBoothController@store')->name('pollingbooth.store');
+Route::get('pollingbooth/{pollingBooth}/edit', 'PollingBoothController@edit')->name('pollingbooth.edit');
+Route::put('pollingbooth/{pollingBooth}', 'PollingBoothController@update')->name('pollingbooth.update');
+Route::delete('pollingbooth/{pollingBooth}', 'PollingBoothController@destroy')->name('pollingbooth.destroy');
+Route::get('pollingbooth/{pollingBooth}', 'PollingBoothController@show')->name('pollingbooth.show');

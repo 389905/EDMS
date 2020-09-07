@@ -2,9 +2,15 @@
 
 @section('content')
 
-<div class="heading text-xl px-2 py-2 border-b-2 border-gray-400">
-  <span class="text-gray-900 font-semibold">{{ $pollingDivision->name }}</span> Polling Division
-  <span class="text-xs text-gray-800 capitalize">| All the data of {{ $pollingDivision->name }}.</span>
+<div class="flex items-center justify-between heading text-xl px-2 py-2 border-b-2 border-gray-400">
+  <div class="">
+    <span class="text-gray-900 font-semibold">{{ $pollingDivision->name }}</span> Polling Division
+    <span class="text-xs text-gray-800 capitalize">| All the data of {{ $pollingDivision->name }}.</span>
+  </div>
+
+  <div class="mr-2 text-sm">
+    <a href="{{ route('district.show', $pollingDivision->district) }}">{{ $pollingDivision->district->name }}</a> DST / {{ $pollingDivision->name }} PD
+  </div>
 </div>
 
 <div class="mt-4 my-4 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
@@ -19,7 +25,7 @@
         <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
           Total registered voters</p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          6389
+          N/A
         </p>
       </div>
     </div>
@@ -53,30 +59,12 @@
           Grama Niladhari Divisions
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          376
+          {{ $pollingDivision->gnDivisions->count() }}
         </p>
       </div>
     </div>
   </div>
-  <div class="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800">
-    <div class="p-4 flex items-center">
-      <div class="p-3 rounded-full text-teal-500 dark:text-teal-100 bg-teal-100 dark:bg-teal-500 mr-4">
-        <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5">
-          <path
-            fill-rule="evenodd"
-            d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-            clip-rule="evenodd"
-          ></path>
-        </svg>
-      </div>
-      <div>
-        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-          Pending actions
-        </p>
-        <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">35</p>
-      </div>
-    </div>
-  </div>
+
 </div> {{-- end of stats --}}
 
 
@@ -89,44 +77,120 @@
 </div>
 @endif
 
-<!-- post card -->
-<div class="flex justify-between mx-4 my-4 max-w-md md:max-w-2xl">
-  <h2 class="ml-4 text-lg text-gray-800 font-semibold">Divisional Secretariats</h2>
-  <a class="text-blue-500 font-semibold hover:text-blue-400 px-2 cursor-not-allowed" href="#">Add new</a>
-</div>
+<div class="flex justify-start">
+  <div class="w-full">
+    <!-- post card -->
+    <div class="flex justify-between mx-4 my-4 max-w-md md:max-w-2xl">
+      <h2 class="ml-4 text-lg text-gray-800 font-semibold">Divisional Secretariats</h2>
+      <a class="text-blue-500 font-semibold hover:text-blue-400 px-2 cursor-not-allowed" href="#">Add new</a>
+    </div>
 
-{{-- Divisional Secretariats --}}
-@foreach ($pollingDivision->divSecs as $key => $divSec)
-  <div class="flex bg-white shadow-lg rounded-lg mx-4 my-4 max-w-md md:max-w-2xl "><!--horizantil margin is just for display-->
-     <div class="flex items-start px-4 py-6 w-full">
-        <img
-          class="w-12 h-12 rounded-full object-cover mr-4 shadow"
-          src="https://cdn4.iconfinder.com/data/icons/elections-polling/614/4543_-_Giving_Vote-512.png"
-          alt="avatar">
-        <div class="w-full ">
-           <div class="flex items-center justify-between ">
-              <a href="{{ route('divsec.show', $divSec) }}" class="text-lg font-semibold text-gray-900 -mt-1">{{ $divSec->name }}</a>
-              <small class="text-sm text-gray-700">Last updated {{ $divSec->updated_at->diffForHumans() }}</small>
-           </div>
-           <p class="text-gray-700">Created {{ $divSec->created_at->diffForHumans() }}</p>
-           <p class="mt-3 text-gray-700 text-sm ">
-              <span class="text-gray-600 text-xs uppercase">Grama Niladhari Division(s): </span>
-           </p>
+    {{-- Divisional Secretariats --}}
+    @foreach ($pollingDivision->divSecs as $key => $divSec)
+      <div class="flex bg-white shadow-lg rounded-lg mx-4 my-4 max-w-md md:max-w-2xl "><!--horizantil margin is just for display-->
+         <div class="flex items-start px-4 py-6 w-full">
+            <img
+              class="w-12 h-12 rounded-full object-cover mr-4 shadow"
+              src="https://cdn4.iconfinder.com/data/icons/elections-polling/614/4543_-_Giving_Vote-512.png"
+              alt="avatar">
+            <div class="w-full ">
+               <div class="flex items-center justify-between ">
+                  <a href="{{ route('divsec.show', $divSec) }}" class="text-lg font-semibold text-gray-900 -mt-1">{{ $divSec->name }}</a>
+                  <small class="text-sm text-gray-700">Last updated {{ $divSec->updated_at->diffForHumans() }}</small>
+               </div>
+               <p class="text-gray-700">Created {{ $divSec->created_at->diffForHumans() }}</p>
+               <p class="mt-3 text-gray-700 text-sm ">
+                  <span class="text-gray-600 text-xs uppercase">Grama Niladhari Division(s): </span> {{ $divSec->gnDivisions->pluck('name')->implode(', ',) }}
+               </p>
 
-           <div class="mt-4 flex items-center float-right">
-             <div class="flex mr-2 text-sm">
-               <a class="text-green-600 font-semibold hover:text-green-400 cursor-not-allowed" href="#">Update</a>
-               <form class="ml-4" action="#" method="post">
-                 @csrf
-                 @method('delete')
-                 <button type="submit" class="cursor-not-allowed text-red-500 hover:text-red-400 font-semibold focus:outline-none" >Delete</button>
-               </form>
-             </div>
-          </div>
+               <div class="mt-4 flex items-center float-right">
+                 <div class="flex mr-2 text-sm">
+                   <a class="text-green-600 font-semibold hover:text-green-400 cursor-not-allowed" href="#">Update</a>
+                   <form class="ml-4" action="#" method="post">
+                     @csrf
+                     @method('delete')
+                     <button type="submit" class="cursor-not-allowed text-red-500 hover:text-red-400 font-semibold focus:outline-none" >Delete</button>
+                   </form>
+                 </div>
+              </div>
 
-        </div>
-     </div>
+            </div>
+         </div>
+      </div>
+      @endforeach
   </div>
-@endforeach
+
+  <div class="w-full">
+    <!-- post card -->
+    <div class="flex justify-between mx-4 my-4 max-w-md md:max-w-2xl">
+      <h2 class="ml-4 text-lg text-gray-800 font-semibold">Polling Booths</h2>
+      <a class="text-blue-500 font-semibold hover:text-blue-400 px-2" href="{{ route('pollingbooth.create', $pollingDivision) }}">Add new</a>
+    </div>
+
+    <div class="mt-4 mb-4 flex">
+      <div class="-my-2 overflow-x-auto ">
+        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr>
+                  <th class="px-6 py-3 bg-gray-700 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    #
+                  </th>
+                  <th class="px-6 py-3 bg-gray-700 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    Name
+                  </th>
+                  <th class="px-6 py-3 bg-gray-700 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    Last Updated
+                  </th>
+                  <th class="px-6 py-3 bg-gray-700 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                    Added On
+                  </th>
+                  <th class="px-6 py-3 bg-gray-700"></th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+
+                @foreach ($pollingBooths as $key => $pollingBooth)
+
+                <tr>
+                  <td class="px-6 py-4 whitespace-no-wrap">
+                    <div class="flex items-center">
+                      <div class="ml-4">
+                        <div class="text-sm leading-5 font-medium text-gray-900">
+                          {{ $pollingBooth->id }}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-no-wrap">
+                    <div class="leading-5 text-gray-900">
+                      <a href="{{ route('pollingbooth.show', $pollingBooth) }}">{{ $pollingBooth->name }}</a>
+                    </div>
+                    <div class="text-sm leading-5 text-gray-500">Divisional Secretariats</div>
+                  </td>
+                  <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                    {{ $pollingBooth->updated_at }}
+                  </td>
+                  <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                    {{ $pollingBooth->created_at }}
+                  </td>
+                  <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                    <a href="{{ route('pollingbooth.edit', $pollingBooth) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                  </td>
+                </tr>
+
+                @endforeach
+
+                <!-- More rows... -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 @endsection

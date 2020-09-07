@@ -67,6 +67,7 @@ class PollingDivisionController extends Controller
     {
         return view('pages.pollingDivision.show')->with([
           'pollingDivision' => $pollingDivision,
+          'pollingBooths' => $pollingDivision->pollingBooths,
         ]);
     }
 

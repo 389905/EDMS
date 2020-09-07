@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Village;
 use App\GnDivision;
-use App\DivSec;
 use Illuminate\Http\Request;
 use Session;
 
-class GnDivisionController extends Controller
+class VillageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,10 +24,10 @@ class GnDivisionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(DivSec $divSec)
+    public function create(GnDivision $gnDivision)
     {
-        return view('pages.gnDivision.create')->with([
-          'divSec' => $divSec,
+        return view('pages.village.create')->with([
+          'gnDivision' => $gnDivision,
         ]);
     }
 
@@ -41,45 +41,43 @@ class GnDivisionController extends Controller
     {
         $request->validate([
           'name' => ['required'],
-          'divSec_id' => ['required'],
+          'gn_division_id' => ['required'],
         ]);
 
-          $gnDivision = GnDivision::create([
+          $village = Village::create([
             'name' => $request['name'],
-            'div_sec_id' => $request['divSec_id'],
+            'gn_division_id' => $request['gn_division_id'],
           ]);
 
-          if($gnDivision){
-            Session::flash('success', $gnDivision->name.' was created.');
+          if($village){
+            Session::flash('success', $village->name.' was created.');
           }else{
             Session::flash('error', 'Something went wrong!');
           }
-          return redirect()->route('divsec.show', $gnDivision->divSec);
+          return redirect()->route('gndivision.show', $village->gnDivision);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\GnDivision  $gnDivision
+     * @param  \App\Village  $village
      * @return \Illuminate\Http\Response
      */
-    public function show(GnDivision $gnDivision)
+    public function show(Village $village)
     {
-        return view('pages.gnDivision.show')->with([
-          'gnDivision' => $gnDivision,
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\GnDivision  $gnDivision
+     * @param  \App\Village  $village
      * @return \Illuminate\Http\Response
      */
-    public function edit(GnDivision $gnDivision)
+    public function edit(Village $village)
     {
-        return view('pages.gnDivision.edit')->with([
-          'gnDivision' => $gnDivision,
+        return view('pages.village.edit')->with([
+          'village' => $village,
         ]);
     }
 
@@ -87,35 +85,36 @@ class GnDivisionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\GnDivision  $gnDivision
+     * @param  \App\Village  $village
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, GnDivision $gnDivision)
+    public function update(Request $request, Village $village)
     {
         $request->validate([
           'name' => ['required'],
         ]);
 
-        $gnDivision->name = $request['name'];
+        $village->name = $request['name'];
 
-        if($gnDivision->save()){
-          Session::flash('success', $gnDivision->name.' was updated!');
+        if($village->save()){
+          Session::flash('success', $village->name.' was updated!');
         }else{
           Session::flash('error', 'Something went wrong!');
         }
-        return redirect()->route('divsec.show', $gnDivision->divSec);
-      }
+
+        return redirect()->route('gndivision.show', $village->gnDivision);
+    }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\GnDivision  $gnDivision
+     * @param  \App\Village  $village
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GnDivision $gnDivision)
+    public function destroy(Village $village)
     {
-        if($gnDivision->delete()){
-          Session::flash('success', 'Grama Niladhari Division was deleted');
+        if($village->delete()){
+          Session::flash('success', 'Village was deleted');
         }else{
           Session::flash('error', 'Something went wrong!');
         }
