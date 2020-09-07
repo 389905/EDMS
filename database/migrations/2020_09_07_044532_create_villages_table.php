@@ -17,6 +17,7 @@ class CreateVillagesTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('gn_division_id');
+            $table->integer('polling_division_id');
             $table->timestamps();
         });
     }

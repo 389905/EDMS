@@ -26,8 +26,11 @@ class VillageController extends Controller
      */
     public function create(GnDivision $gnDivision)
     {
+        $pollingDivision = $gnDivision->divSec->pollingDivision;
+
         return view('pages.village.create')->with([
           'gnDivision' => $gnDivision,
+          'pollingDivision' => $pollingDivision,
         ]);
     }
 
@@ -42,11 +45,13 @@ class VillageController extends Controller
         $request->validate([
           'name' => ['required'],
           'gn_division_id' => ['required'],
+          'polling_division_id' => ['required'],
         ]);
 
           $village = Village::create([
             'name' => $request['name'],
             'gn_division_id' => $request['gn_division_id'],
+            'polling_division_id' => $request['polling_division_id'],
           ]);
 
           if($village){

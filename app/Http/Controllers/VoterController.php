@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Voter;
+use App\PollingBooth;
+use App\Village;
 use Illuminate\Http\Request;
+use Session;
 
 class VoterController extends Controller
 {
@@ -22,9 +25,11 @@ class VoterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(PollingBooth $pollingBooth)
     {
-        //
+        return view('pages.voter.create')->with([
+          'pollingBooth' => $pollingBooth,
+        ]);
     }
 
     /**
@@ -35,7 +40,29 @@ class VoterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+          'name' => ['required'],
+          'house_number' => ['required'],
+          'gender' => ['required'],
+          'village_id' => ['required'],
+          'polling_booth_id' => ['required'],
+        ]);
+
+          $voter = Voter::create([
+            'name' => $request['name'],
+            'house_number' => $request['house_number'],
+            'gender' => $request['gender'],
+            'village_id' => $request['village_id'],
+            'polling_booth_id' => $request['polling_booth_id'],
+          ]);
+
+          if($voter){
+            Session::flash('success', $voter->name.' was created.');
+          }else{
+            Session::flash('error', 'Something went wrong!');
+          }
+
+          return redirect()->route('pollingbooth.show', $voter->pollingBooth);
     }
 
     /**

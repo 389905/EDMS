@@ -73,3 +73,9 @@ Route::get('pollingbooth/{pollingBooth}/edit', 'PollingBoothController@edit')->n
 Route::put('pollingbooth/{pollingBooth}', 'PollingBoothController@update')->name('pollingbooth.update');
 Route::delete('pollingbooth/{pollingBooth}', 'PollingBoothController@destroy')->name('pollingbooth.destroy');
 Route::get('pollingbooth/{pollingBooth}', 'PollingBoothController@show')->name('pollingbooth.show');
+
+// voters
+Route::get('voter/create/{pollingBooth}', 'VoterController@create')->name('voter.create');
+Route::post('voter', 'VoterController@store')->name('voter.store');
+Route::get('voter/{voter}/edit', 'VoterController@edit')->name('voter.edit');
+Route::get('voter/{voter}', 'VoterController@show')->name('voter.show');

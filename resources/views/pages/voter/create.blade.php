@@ -3,7 +3,7 @@
 @section('content')
 <div class="heading flex justify-between text-xl px-2 py-2 border-b-2 border-gray-300">
   <div class="">
-    <span class="text-gray-900">Create New Village for {{ $gnDivision->name }}</span>
+    <span class="text-gray-900">Add new voter for {{ $pollingBooth->name }}</span>
     <span class="text-xs text-gray-800 capitalize"></span>
   </div>
 
@@ -15,21 +15,19 @@
   </a>  {{-- end of button --}}
 </div> {{-- end of header  --}}
 
-<form class="mx-auto w-full max-w-lg mx-8 my-8 px-4 py-4 bg-white shadow-lg rounded-lg" method="post" action="{{ route('village.store') }}">
+<form class="mx-auto w-full max-w-lg mx-8 my-8 px-4 py-4 bg-white shadow-lg rounded-lg" method="post" action="{{ route('voter.store') }}">
   @csrf
 
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full  px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-name">
-        Village Name
+        Name
       </label>
       <input name="name" class="appearance-none block w-full bg-gray-200 text-gray-700 border @error('name') border-red-500 @enderror rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-name" type="text" placeholder="Colombo" value="{{ old('name') }}">
       @error('name')<p class="text-red-500 text-xs italic">Please fill out this field.</p>@enderror
     </div>
   </div>
 
-  <input type="hidden" name="gn_division_id" value="{{ $gnDivision->id }}">
-  <input type="hidden" name="polling_division_id" value="{{ $pollingDivision->id }}">
 
   <div class="flex justify-end">
     <button class="mt-2 py-2 px-4 bg-blue-500 hover:bg-blue-400 text-white font-bold rounded inline-flex items-center outline-none">

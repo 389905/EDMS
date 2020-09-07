@@ -13,4 +13,8 @@ class PollingBooth extends Model
     public function pollingDivision(){
       return $this->belongsTo(PollingDivision::class);
     }
+
+    public function voters(){
+      return $this->hasMany(Voter::class);
+    }
 }

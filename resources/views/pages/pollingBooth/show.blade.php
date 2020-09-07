@@ -28,7 +28,7 @@
           Voters
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          N/A
+          {{ $pollingBooth->voters->count() }}
         </p>
       </div>
     </div>
@@ -49,41 +49,136 @@
 <!-- post card -->
 <div class="flex justify-between mx-4 my-4 max-w-md md:max-w-2xl">
   <h2 class="ml-4 text-lg text-gray-800 font-semibold">Voters</h2>
-  <a class="text-blue-500 font-semibold hover:text-blue-400 px-2" href="{{ route('village.create', $pollingBooth) }}">Add new</a>
 </div>
 
-{{-- Divisional Secretariats --}}
-{{-- @foreach ($gnDivision->villages as $key => $village)
-  <div class="flex bg-white shadow-lg rounded-lg mx-4 my-4 max-w-md md:max-w-2xl "><!--horizantil margin is just for display-->
-     <div class="flex items-start px-4 py-6 w-full">
-        <img
-          class="w-12 h-12 rounded-full object-cover mr-4 shadow"
-          src="https://cdn4.iconfinder.com/data/icons/elections-polling/614/4543_-_Giving_Vote-512.png"
-          alt="avatar">
-        <div class="w-full ">
-           <div class="flex items-center justify-between ">
-              <a href="" class="text-lg font-semibold text-gray-900 -mt-1">{{ $village->name }}</a>
-              <small class="text-sm text-gray-700">Last updated {{ $village->updated_at->diffForHumans() }}</small>
-           </div>
-           <p class="text-gray-700">Created {{ $village->created_at->diffForHumans() }}</p>
-           <p class="mt-3 text-gray-700 text-sm ">
-              <span class="text-gray-600 text-xs uppercase">Text? </span>
-           </p>
+<form class="mx-8 my-8 px-4 py-4 bg-white shadow-lg rounded-lg" method="post" action="{{ route('voter.store') }}">
+  @csrf
 
-           <div class="mt-4 flex items-center float-right">
-             <div class="flex mr-2 text-sm">
-               <a class="text-green-600 font-semibold hover:text-green-400" href="{{ route('village.edit', $village) }}">Update</a>
-               <form class="ml-4" action="{{ route('village.destroy', $village) }}" method="post">
-                 @csrf
-                 @method('delete')
-                 <button type="submit" class="text-red-500 hover:text-red-400 font-semibold focus:outline-none" onclick="return confirm('Are you sure you want to delete {{ $village->name }}?');">Delete</button>
-               </form>
-             </div>
-          </div>
+  <div class="flex justify-start items-center -mx-3 ">
+    <div class="w-1/4 px-3 mb-6 md:mb-0 ">
+      <input name="house_number" class="appearance-none block w-full bg-gray-200 text-gray-700 border @error('name') border-red-500 @enderror rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="grid-house_number" type="text" placeholder="House Number" value="{{ old('house_number') }}">
+      @error('house_number')<p class="text-red-500 text-xs italic">Please fill out this field.</p>@enderror
+    </div>
 
+    <div class="w-full px-3 mb-6 md:mb-0">
+      <input name="name" class="appearance-none block w-full bg-gray-200 text-gray-700 border @error('name') border-red-500 @enderror rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="grid-name" type="text" placeholder="Name" value="{{ old('name') }}">
+      @error('name')<p class="text-red-500 text-xs italic">Please fill out this field.</p>@enderror
+    </div>
+
+    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+      <div class="relative">
+        <select name="gender" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-gender">
+            <option class="capitalize" value="M">Male</option>
+            <option class="capitalize" value="F">Female</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
         </div>
-     </div>
+      </div>
+    </div>
+
+    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+      <div class="relative">
+        <select name="village_id" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-role">
+            @foreach ($pollingBooth->pollingDivision->villages as $key => $village)
+              <option class="capitalize" value="{{ $village->id }}">{{ $village->name }}</option>
+            @endforeach
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <input type="hidden" name="polling_booth_id" value="{{ $pollingBooth->id }}">
+
+    <button type="submit" class="w-1/6 text-blue-500 font-semibold hover:text-blue-400 px-2">Add</button>
   </div>
-@endforeach --}}
+
+
+
+</form>
+
+{{-- Voters --}}
+<div class="mt-4 mb-4 flex">
+  <div class="-my-2 overflow-x-auto ">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead>
+            <tr>
+              <th class="px-6 py-3 bg-gray-700 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                #
+              </th>
+              <th class="px-6 py-3 bg-gray-700 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                House Number
+              </th>
+              <th class="px-6 py-3 bg-gray-700 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                Name
+              </th>
+              <th class="px-6 py-3 bg-gray-700 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                Gender
+              </th>
+              <th class="px-6 py-3 bg-gray-700 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                Village
+              </th>
+              <th class="px-6 py-3 bg-gray-700 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                Last Updated
+              </th>
+              <th class="px-6 py-3 bg-gray-700 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                Added On
+              </th>
+              <th class="px-6 py-3 bg-gray-700"></th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+
+            @foreach ($pollingBooth->voters as $key => $voter)
+
+            <tr>
+              <td class="px-6 py-4 whitespace-no-wrap">
+                <div class="flex items-center">
+                  <div class="ml-4">
+                    <div class="text-sm leading-5 font-medium text-gray-900">
+                      {{ $key+1 }}
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                {{ $voter->house_number }}
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap">
+                <div class="leading-5 text-gray-900">
+                  <a href="{{ route('voter.show', $voter) }}">{{ $voter->name }}</a>
+                </div>
+                <div class="text-sm leading-5 text-gray-500">Divisional Secretariats</div>
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                {{ $voter->gender }}
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                {{ $voter->village->name }}
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                {{ $voter->updated_at }}
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+                {{ $voter->created_at }}
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                <a href="{{ route('voter.edit', $voter) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+              </td>
+            </tr>
+
+            @endforeach
+
+            <!-- More rows... -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
 @endsection

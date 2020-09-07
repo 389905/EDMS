@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\PollingBooth;
 use App\PollingDivision;
+use App\Village;
 use Illuminate\Http\Request;
 use Session;
 
