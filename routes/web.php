@@ -78,4 +78,5 @@ Route::get('pollingbooth/{pollingBooth}', 'PollingBoothController@show')->name('
 Route::get('voter/create/{pollingBooth}', 'VoterController@create')->name('voter.create');
 Route::post('voter', 'VoterController@store')->name('voter.store');
 Route::get('voter/{voter}/edit', 'VoterController@edit')->name('voter.edit');
+Route::put('voter/{voter}', 'VoterController@update')->name('voter.update');
 Route::get('voter/{voter}', 'VoterController@show')->name('voter.show');

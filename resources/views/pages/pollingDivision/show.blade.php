@@ -25,7 +25,7 @@
         <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
           Total registered voters</p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          N/A
+          {{ $pollingDivision->voters->count() }}
         </p>
       </div>
     </div>

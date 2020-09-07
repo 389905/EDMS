@@ -84,7 +84,9 @@ class VoterController extends Controller
      */
     public function edit(Voter $voter)
     {
-        //
+        return view('pages.voter.edit')->with([
+          'voter' => $voter
+        ]);
     }
 
     /**

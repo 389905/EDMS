@@ -29,4 +29,8 @@ class PollingDivision extends Model
     public function villages(){
       return $this->hasMany(Village::class);
     }
+
+    public function voters(){
+      return $this->hasManyThrough(Voter::class, PollingBooth::class);
+    }
 }
