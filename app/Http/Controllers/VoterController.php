@@ -100,7 +100,25 @@ class VoterController extends Controller
      */
     public function update(Request $request, Voter $voter)
     {
-        //
+      $request->validate([
+        'name' => ['required'],
+        'house_number' => ['required'],
+        'gender' => ['required']
+      ]);
+
+        $voter->name = $request['name'];
+        $voter->house_number = $request['house_number'];
+        $voter->gender = $request['gender'];
+        $voter->nic = $request['nic'];
+        $voter->race = $request['race'];
+
+        if($voter->save()){
+          Session::flash('success', $voter->name.' was updated.');
+        }else{
+          Session::flash('error', 'Something went wrong!');
+        }
+
+        return redirect()->route('pollingbooth.show', $voter->pollingBooth);
     }
 
     /**

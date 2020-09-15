@@ -15,9 +15,10 @@
   </a>  {{-- end of button --}}
 </div> {{-- end of header  --}}
 
+
 <form class=" mx-8 my-8 px-4 py-4 bg-white shadow-lg rounded-lg" method="post" action="{{ route('voter.update', $voter) }}">
   @csrf
-
+  @method('put')
   <div class="flex -mx-3 mb-6">
     <div class="px-3 mb-6 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-house_number">
@@ -50,6 +51,23 @@
       </div>
     </div>
 
+    <div class="w-1/4 px-3 ">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-race">
+        Race
+      </label>
+      <div class="relative">
+        <select name="race" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-gender">
+            <option class="capitalize" value="" {{ $voter->race === '' ? 'selected':'' }}></option>
+            <option class="capitalize" value="Sinhala" {{ $voter->race === 'Sinhala' ? 'selected':'' }}>Sinhala</option>
+            <option class="capitalize" value="Tamil" {{ $voter->race === 'Tamil' ? 'selected':'' }}>Tamil</option>
+            <option class="capitalize" value="Muslim" {{ $voter->race === 'Muslim' ? 'selected':'' }}>Muslim</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <div class="flex -mx-3 mb-6">
@@ -58,7 +76,7 @@
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-nic">
         NIC
       </label>
-      <input name="nic" class="appearance-none block w-full bg-gray-200 text-gray-700 border @error('nic') border-red-500 @enderror rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-name" type="text" placeholder="NIC" value="">
+      <input name="nic" class="appearance-none block w-full bg-gray-200 text-gray-700 border @error('nic') border-red-500 @enderror rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-name" type="text" placeholder="NIC" value="{{ $voter->nic }}">
       @error('nic')<p class="text-red-500 text-xs italic">Please fill out this field.</p>@enderror
     </div>
 
@@ -75,7 +93,7 @@
         Likely to Vote for
       </label>
       <div class="relative">
-        <select name="gender" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-gender">
+        <select name="party" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-gender">
             <option class="capitalize" value="">N/A</option>
             <option class="capitalize" value="">SJB</option>
             <option class="capitalize" value="">SLPP</option>
