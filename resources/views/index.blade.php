@@ -36,7 +36,7 @@
       <div class="mt-4 flex">
           <span class="text-green-400">computer:~$</span>
           <p class="flex-1 typing items-center pl-2">
-              apt-get hire me
+              apt-get start!
               <br>
           </p>
       </div>

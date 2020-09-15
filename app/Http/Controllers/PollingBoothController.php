@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\PollingBooth;
 use App\PollingDivision;
 use App\Village;
+use App\Voter;
 use Illuminate\Http\Request;
 use Session;
 
@@ -68,8 +69,14 @@ class PollingBoothController extends Controller
      */
     public function show(PollingBooth $pollingBooth)
     {
+        $voters = Voter::where('polling_booth_id', $pollingBooth->id)
+        ->limit(10)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
         return view('pages.pollingBooth.show')->with([
           'pollingBooth' => $pollingBooth,
+          'voters' => $voters
         ]);
     }
 

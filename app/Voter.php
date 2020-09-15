@@ -7,7 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Voter extends Model
 {
     protected $fillable = [
-        'name', 'house_number', 'gender', 'village_id', 'polling_booth_id',
+        'name',
+        'house_number',
+        'gender',
+        'village_id',
+        'polling_booth_id',
+        'nic',
+        'race'
     ];
 
     public function pollingDivision(){

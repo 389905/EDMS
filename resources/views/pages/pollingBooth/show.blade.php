@@ -65,11 +65,30 @@
       @error('name')<p class="text-red-500 text-xs italic">Please fill out this field.</p>@enderror
     </div>
 
+    <div class="w-1/4 px-3 mb-6 md:mb-0 ">
+      <input name="nic" class="appearance-none block w-full bg-gray-200 text-gray-700 border @error('nic') border-red-500 @enderror rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="grid-nic" type="text" placeholder="NIC" value="{{ old('nic') }}">
+      @error('nic')<p class="text-red-500 text-xs italic">Please fill out this field.</p>@enderror
+    </div>
+
     <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
       <div class="relative">
         <select name="gender" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-gender">
             <option class="capitalize" value="M">Male</option>
             <option class="capitalize" value="F">Female</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+      <div class="relative">
+        <select name="race" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-race">
+            <option class="capitalize" value=""></option>
+            <option class="capitalize" value="Sinhala">Sinhala</option>
+            <option class="capitalize" value="Tamil">Tamil</option>
+            <option class="capitalize" value="Muslim">Muslim</option>
         </select>
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
           <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -120,6 +139,12 @@
                 Gender
               </th>
               <th class="px-6 py-3 bg-gray-700 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                Race
+              </th>
+              <th class="px-6 py-3 bg-gray-700 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                NIC
+              </th>
+              <th class="px-6 py-3 bg-gray-700 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                 Village
               </th>
               <th class="px-6 py-3 bg-gray-700 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
@@ -133,37 +158,46 @@
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
 
-            @foreach ($pollingBooth->voters as $key => $voter)
+
+
+
+            @foreach ($voters as $key => $voter)
 
             <tr>
               <td class="px-6 py-4 whitespace-no-wrap">
                 <div class="flex items-center">
                   <div class="ml-4">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                      {{ $key+1 }}
+                      {{ $voter->id }}
                     </div>
                   </div>
                 </div>
               </td>
-              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-700">
                 {{ $voter->house_number }}
               </td>
               <td class="px-6 py-4 whitespace-no-wrap">
-                <div class="leading-5 text-gray-900">
+                <div class="leading-5 text-gray-900 font-semibold">
                   <a href="{{ route('voter.show', $voter) }}">{{ $voter->name }}</a>
                 </div>
                 <div class="text-sm leading-5 text-gray-500">Divisional Secretariats</div>
               </td>
-              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-700">
                 {{ $voter->gender }}
               </td>
-              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-700">
+                {{ $voter->race }}
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-700">
+                {{ $voter->nic }}
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-700">
                 {{ $voter->village->name }}
               </td>
-              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-700">
                 {{ $voter->updated_at }}
               </td>
-              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
+              <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-700">
                 {{ $voter->created_at }}
               </td>
               <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">

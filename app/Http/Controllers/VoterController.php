@@ -52,6 +52,8 @@ class VoterController extends Controller
             'name' => $request['name'],
             'house_number' => $request['house_number'],
             'gender' => $request['gender'],
+            'nic' => $request['nic'],
+            'race' => $request['race'],
             'village_id' => $request['village_id'],
             'polling_booth_id' => $request['polling_booth_id'],
           ]);

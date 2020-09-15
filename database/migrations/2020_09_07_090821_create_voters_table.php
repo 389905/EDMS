@@ -18,6 +18,8 @@ class CreateVotersTable extends Migration
             $table->string('house_number');
             $table->string('name');
             $table->string('gender');
+            $table->string('race');
+            $table->string('nic');
             $table->integer('village_id');
             $table->integer('polling_booth_id');
             $table->timestamps();
