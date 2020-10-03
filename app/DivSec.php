@@ -16,10 +16,10 @@ class DivSec extends Model
     }
 
     public function gnDivisions(){
-      return $this->hasMany(gnDivision::class);
+      return $this->hasMany(GnDivision::class);
     }
 
     public function villages(){
-      return $this->hasManyThrough(Village::class, gnDivision::class);
+      return $this->hasManyThrough(Village::class, GnDivision::class);
     }
 }
