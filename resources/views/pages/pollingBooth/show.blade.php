@@ -100,7 +100,7 @@
       <div class="relative">
         <select name="village_id" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-role">
             @foreach ($pollingBooth->pollingDivision->villages as $key => $village)
-              <option class="capitalize" value="{{ $village->id }}">{{ $village->name }}</option>
+              <option class="capitalize" @if(session('village_id') == $village->id) selected  @endif value="{{ $village->id }}">{{ $village->name }}</option>
             @endforeach
         </select>
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">

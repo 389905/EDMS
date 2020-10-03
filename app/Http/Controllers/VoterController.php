@@ -60,6 +60,7 @@ class VoterController extends Controller
 
           if($voter){
             Session::flash('success', $voter->name.' was created.');
+            Session::put('village_id', $request['village_id']);
           }else{
             Session::flash('error', 'Something went wrong!');
           }
