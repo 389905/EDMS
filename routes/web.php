@@ -26,12 +26,12 @@ Route::get('district', 'DistrictController@index')->name('district.index');
 Route::get('district/{district}', 'DistrictController@show')->name('district.show');
 
 // user
-Route::get('user', 'userController@index')->name('user.index');
-Route::get('user/create', 'userController@create')->name('user.create');
-Route::post('user', 'userController@store')->name('user.store');
-Route::get('user/{user}/edit', 'userController@edit')->name('user.edit');
-Route::put('user/{user}', 'userController@update')->name('user.update');
-Route::delete('user/{user}', 'userController@destroy')->name('user.destroy');
+Route::get('user', 'UserController@index')->name('user.index');
+Route::get('user/create', 'UserController@create')->name('user.create');
+Route::post('user', 'UserController@store')->name('user.store');
+Route::get('user/{user}/edit', 'UserController@edit')->name('user.edit');
+Route::put('user/{user}', 'UserController@update')->name('user.update');
+Route::delete('user/{user}', 'UserController@destroy')->name('user.destroy');
 
 // polling division
 Route::get('pollingdivision/create/{district}', 'PollingDivisionController@create')->name('pollingDivision.create');

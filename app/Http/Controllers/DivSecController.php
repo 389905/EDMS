@@ -16,7 +16,7 @@ class DivSecController extends Controller
      */
     public function index()
     {
-        return view('pages.divsec.index')->with([
+        return view('pages.divSec.index')->with([
           'divsecs' => DivSec::all()
         ]);
     }
