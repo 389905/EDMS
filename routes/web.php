@@ -53,12 +53,12 @@ Route::delete('divsec/{divSec}', 'DivSecController@destroy')->name('divsec.destr
 Route::get('divsec/{divSec}', 'DivSecController@show')->name('divsec.show');
 
 // grama niladhari divisions
-Route::get('gndivision/create/{divSec}', 'gnDivisionController@create')->name('gndivision.create');
-Route::post('gndivision', 'gnDivisionController@store')->name('gndivision.store');
-Route::get('gndivision/{gnDivision}/edit', 'gnDivisionController@edit')->name('gndivision.edit');
-Route::put('gndivision/{gnDivision}', 'gnDivisionController@update')->name('gndivision.update');
-Route::delete('gndivision/{gnDivision}', 'gnDivisionController@destroy')->name('gndivision.destroy');
-Route::get('gndivision/{gnDivision}', 'gnDivisionController@show')->name('gndivision.show');
+Route::get('gndivision/create/{divSec}', 'GnDivisionController@create')->name('gndivision.create');
+Route::post('gndivision', 'GnDivisionController@store')->name('gndivision.store');
+Route::get('gndivision/{gnDivision}/edit', 'GnDivisionController@edit')->name('gndivision.edit');
+Route::put('gndivision/{gnDivision}', 'GnDivisionController@update')->name('gndivision.update');
+Route::delete('gndivision/{gnDivision}', 'GnDivisionController@destroy')->name('gndivision.destroy');
+Route::get('gndivision/{gnDivision}', 'GnDivisionController@show')->name('gndivision.show');
 
 // villages divisions
 Route::get('village/create/{gnDivision}', 'VillageController@create')->name('village.create');
