@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// minor change
+
 Route::get('/', function () {
     return view('index');
 })->name('dashboard');
